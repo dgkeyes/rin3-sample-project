@@ -39,3 +39,18 @@ transit_cost %>%
   gt()
 ```
 
+```{r}
+avg_transit_cost <- transit_cost %>% 
+  group_by(country) %>% 
+  mutate(real_cost = parse_number(real_cost)) %>% 
+  summarize(avg_cost = mean(real_cost,
+                            na.rm = TRUE))
+
+ggplot(data = avg_transit_cost,
+       aes(x = country,
+           y = avg_cost)) +
+  geom_col() +
+  coord_flip()
+```
+
+
