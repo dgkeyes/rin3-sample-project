@@ -45,13 +45,16 @@ avg_transit_cost <- transit_cost %>%
   group_by(country) %>% 
   mutate(real_cost = parse_number(real_cost)) %>% 
   summarize(avg_cost = mean(real_cost,
-                            na.rm = TRUE))
+                            na.rm = TRUE)) %>% 
+  drop_na() 
 
 ggplot(data = avg_transit_cost,
        aes(x = country,
            y = avg_cost)) +
   geom_col() +
-  coord_flip()
+  coord_flip() +
+  labs(title = "Average Transit Cost by Country",
+       x = NULL,
+       y = "Cost in Dollars") +
+  theme_minimal()
 ```
-
-I'm just making a change
